@@ -1,0 +1,6 @@
+/* Add this to your main CSS file or in a <style> tag in your HTML head */
+header, .header-top, .header-middle, .header-bottom {
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+}

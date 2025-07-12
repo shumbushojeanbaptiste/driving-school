@@ -98,13 +98,12 @@
 
         </style>
 
-   <style>
+        <style>
         /* Zoom the body to 90% using CSS */
         body {
             zoom: 90%;
         }
-    </style>
-        
+    </style>   
         
     </head>
 
@@ -253,6 +252,6 @@
 
 <div id="loading-overlay" class="overlay">
   <div class="spinner"></div>
- 
+  
 </div>
 

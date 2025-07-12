@@ -198,7 +198,7 @@ header, .header-top, .header-middle, .header-bottom {
 	.cat-dropdown > li > a{
 	 padding: 10px 25px 10px 35px;
 	 line-height: 18px;
-	 font-size: 13px;
+	 font-size: 11px;
 	 color: #7a7a7a;
 	 font-weight: normal;
 	 position: relative;
@@ -246,7 +246,7 @@ header, .header-top, .header-middle, .header-bottom {
 	.item-icon::before {
 		left: 10px;
 		top: 11px;
-		font-size: 15px;
+		font-size: 13px;
 	}
 	.item-text::before {
 		left: -4px;

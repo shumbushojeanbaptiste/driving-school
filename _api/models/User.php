@@ -163,7 +163,14 @@ public function create() {
     
     public function getAll() {
         try {
-            $query = "SELECT acc_id, first_name, last_name, email, phone, center_id, school_id, role_id, status FROM {$this->table}";
+            $query = "SELECT acc_id, first_name, school_full_name,tbl_centers.center_name,
+             last_name, tbl_users.email, tbl_users.phone, tbl_users.center_id, role_name,
+            tbl_users.school_id, tbl_users.role_id, tbl_users.status FROM {$this->table}
+            inner join tbl_roles on tbl_users.role_id = tbl_roles.role_id
+            inner join  tbl_driving_schools on tbl_users.school_id =  tbl_driving_schools.school_id
+            inner join tbl_centers on tbl_users.center_id = tbl_centers.center_id
+            ORDER BY tbl_users.acc_id DESC
+            ";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -231,7 +238,10 @@ class Authantication {
             }
 // check pass user using password_verify as create by PASSWORD_ARGON2I
 // Note: In a real application, you should hash the password and store it securely.
-            $query = "SELECT acc_id, first_name, last_name, email, phone, center_id, school_id, role_id, status, security_key FROM {$this->table} WHERE email = :email AND status = '1'";
+            $query = "SELECT acc_id, first_name, last_name, email, phone, center_id,
+             school_id, tbl_roles.role_id, tbl_roles.role_name, status, security_key FROM {$this->table}
+             INNER JOIN tbl_roles ON {$this->table}.role_id = tbl_roles.role_id
+             WHERE email = :email AND status = '1'";
             // Note: In a real application, you should hash the password and compare it with the hashed value in the database.
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(':email', $email);

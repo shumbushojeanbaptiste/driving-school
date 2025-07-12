@@ -1,4 +1,13 @@
 
+  <?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    // Redirect to the sign-in page
+    header("Location: ../public/sign-in");
+    exit(); // Always call exit after header redirect
+}
+?>
+
   <body class="">
     <div class="page">
       <div class="page-main">
@@ -46,8 +55,8 @@
                   <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
                     <span class="avatar" style="background-image: url(./demo/faces/female/25.jpg)"></span>
                     <span class="ml-2 d-none d-lg-block">
-                      <span class="text-default">Jane Pearson</span>
-                      <small class="text-muted d-block mt-1">Administrator</small>
+                      <span class="text-default"><?php echo $_SESSION['user']['first_name']; ?></span>
+                      <small class="text-muted d-block mt-1"><?php echo $_SESSION['user']['role_name']; ?></small>
                     </span>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
@@ -58,7 +67,7 @@
                       <i class="dropdown-icon fe fe-settings"></i> Settings
                     </a>
         
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="logout">
                       <i class="dropdown-icon fe fe-log-out"></i> Sign out
                     </a>
                   </div>

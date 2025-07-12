@@ -212,6 +212,7 @@ public function login() {
                     'center_id' => $user['center_id'],
                     'school_id' => $user['school_id'],
                     'role_id' => $user['role_id'],
+                    'role_name' => $user['role_name'],
                     'status' => $user['status']
                 ];
                 Response::json([
@@ -243,7 +244,7 @@ public function login() {
                 $db = (new Database())->connect();
                 $authantication = new Authantication($db);
 
-                $acc_id = $_SESSION['user_id'] ?? null;
+                $acc_id = $_SESSION['acc_id'] ?? null;
                 if (!$acc_id) {
                     Response::json(["error" => "User not authenticated."], 401);
                     return;

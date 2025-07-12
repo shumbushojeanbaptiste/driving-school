@@ -168,7 +168,7 @@ public function create() {
 
     public function getAll() {
         try {
-            $query = "SELECT first_name, familly_name, email, phone, ID_number, status FROM {$this->table} order by id desc";
+            $query = "SELECT id,stu_code, first_name, familly_name, email, phone, ID_number, status FROM {$this->table} order by id desc";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);

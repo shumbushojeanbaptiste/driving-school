@@ -8,7 +8,7 @@
   -webkit-font-smoothing: antialiased;
   text-decoration: none;
   margin-right: 2px;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 .br-theme-fontawesome-stars .br-widget a:after {
   content: '\f005';
