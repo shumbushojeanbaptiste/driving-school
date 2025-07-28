@@ -217,11 +217,11 @@
                                             <li class="dropdown-holder"><a href="training">Training</a>
                                               
                                             </li>
-                                            <li class="catmenu-dropdown megamenu-static-holder"><a href="fees">Fees</a>
+                                            <li class="catmenu-dropdown megamenu-static-holder"><a href="fees">Tracking</a>
                                               
                                             </li>
-                                            <li><a href="sessions">Sessions</a></li>
-                                            <li><a href="tracker">Tracking</a></li>
+                                            <li><a href="sessions">School and Location</a></li>
+                                        
                                             <li><a href="licenses">License(s)</a></li>
                                             <li><a href="services">Payment(s)</a></li>
 
