@@ -20,9 +20,4 @@ class Database {
         return $this->conn; 
     }
 } 
-// changes
-
- 
-
-
- 
+// changes and customized 
