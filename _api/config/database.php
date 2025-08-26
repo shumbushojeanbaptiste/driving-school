@@ -7,7 +7,7 @@ class Database {
     public $conn;
 
     public function connect() {
-        $this->conn = null;
+        $this->conn = null; 
         try {
             $this->conn = new PDO(
                 "mysql:host={$this->host};dbname={$this->db_name}",
@@ -17,8 +17,12 @@ class Database {
         } catch(PDOException $e) {
             echo "Connection error: " . $e->getMessage();
         }
-        return $this->conn;
+        return $this->conn; 
     }
 } 
+// changes
+
+ 
+
 
  
