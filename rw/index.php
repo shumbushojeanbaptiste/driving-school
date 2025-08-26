@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/../vendor/links.php';
 $request = $_SERVER['REQUEST_URI'];
-$basePath = '/www.driving.rw/public';  // ⚠️ adjust if in a subdirectory
+$basePath = '/www.driving.rw/rw';  // ⚠️ adjust if in a subdirectory
 
 // Remove basePath from request
 $request = str_replace($basePath, '', $request);
