@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, pdo, pdo_mysql
+          coverage: none
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        run: |
+          if [ -f composer.json ]; then
+            composer install --no-interaction --prefer-dist
+          fi
+
+      # - name: PHP Lint
+      #   run: find _api/ -type f -name "*.php" -exec php -l {} \;
+
+      # - name: PHP_CodeSniffer (PSR-12)
+      #   run: |
+      #     if [ ! -f vendor/bin/phpcs ]; then
+      #       composer require --dev squizlabs/php_codesniffer
+      #     fi
+      #     ./vendor/bin/phpcs --standard=PSR12 _api/
+
+      # - name: PHPStan Static Analysis (level 5)
+      #   run: |
+      #     if [ ! -f vendor/bin/phpstan ]; then
+      #       composer require --dev phpstan/phpstan
+      #     fi
+      #     ./vendor/bin/phpstan analyse _api/ --level=5
+
+      # Uncomment if you have PHPUnit tests
+      # - name: Run PHPUnit
+      #   run: vendor/bin/phpunit
+
+      - name: Check API directory structure
+        run: |
+          test -d _api/controllers
+          test -d _api/models
+          test -f _api/config/database.php
+
+      - name: Check for database schema changes
+        run: |
+          if git fetch origin main && git diff --quiet origin/main -- fin_tracker_schema.sql; then
+            echo "No database schema changes detected."
+          else
+            echo "Database schema file (fin_tracker_schema.sql) has changed!"
+            exit 1
+          fi
+
+
+
+
