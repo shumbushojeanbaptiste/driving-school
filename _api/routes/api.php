@@ -14,11 +14,6 @@ switch (true) {
     case $request === '/':
         echo json_encode(['message' => 'Welcome to Driving School API']);
         break;
-
-    case $request === '/auth':
-        echo json_encode(['message' => 'Welcome to the Auth API']);
-        break;
-
         // Authentication routes
 
     case $request === '/auth/register' && $method === 'POST':
