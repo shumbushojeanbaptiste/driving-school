@@ -31,6 +31,8 @@ sessions/
 uploads/
 files/
 images/
+public/
+vendor/
 
 # =====================
 # Backup / temp files
