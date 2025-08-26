@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
                           <th class="w-1">User-code.</th>
                           
                           <th>Names</th>
-                          <th>Email</th>
+                          <!-- <th>Email</th> -->
                           <th>Phone number</th>
                           <th>Schools </th>
                           <th>Role</th>
@@ -122,9 +122,9 @@ foreach ($data as $user) {
     <tr class="<?php echo $rowClass; ?>">
         <td><span class="text-muted">#00<?php echo $i; ?></span></td>
         <td><?php echo $user['first_name'] . ' ' . $user['last_name']; ?></td>
-        <td><span class="text-muted"><?php echo $user['email']; ?></span></td>
+        <!-- <td><span class="text-muted"><?php echo $user['email']; ?></span></td> -->
         <td><span class="text-muted"><?php echo $user['phone']; ?></span></td>
-        <td><?php echo $user['school_full_name']; ?> | <?php echo $user['center_name']; ?></td>
+        <td><?php echo $user['school_full_name']; ?> | <?php //echo $user['center_name']; ?></td>
         <td><?php echo $user['role_name']; ?></td>
         <td></td>
         <td>
