@@ -9,29 +9,10 @@ Thumbs.db
 # =====================
 .vscode/
 .idea/
-*.sublime-project
-*.sublime-workspace
 
 # =====================
-# Composer / Dependencies
+# Dependencies
 # =====================
-vendor/
-
-# =====================
-# Logs, Cache, Sessions
-# =====================
-*.log
-cache/
-tmp/
-sessions/
-
-# =====================
-# User uploads / files
-# =====================
-uploads/
-files/
-images/
-public/
 vendor/
 
 # =====================
@@ -44,5 +25,5 @@ vendor/
 # =====================
 # Private Backend API
 # =====================
-_api/   # <- This folder will NOT be pushed to GitHub
+# _api/   # <- This folder will NOT be pushed to GitHub
 _api.zip
