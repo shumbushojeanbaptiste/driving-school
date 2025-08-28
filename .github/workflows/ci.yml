@@ -56,11 +56,15 @@ jobs:
       # - name: Run PHPUnit
       #   run: vendor/bin/phpunit
 
-      - name: Check API directory structure
+      - name: Check API directory structure and admin setup
         run: |
           test -d _api/controllers
           test -d _api/models
           test -f _api/config/database.php
+          test -d _api/routes
+          test -d _api/secure
+          test -d vendor/admin
+
 
       - name: Check for database schema changes
         run: |
