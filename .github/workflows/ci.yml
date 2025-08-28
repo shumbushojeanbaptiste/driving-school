@@ -64,6 +64,7 @@ jobs:
           test -d _api/routes
           test -d _api/secure
           test -d vendor/admin
+          test -f vendor/links.php
 
 
       - name: Check for database schema changes
