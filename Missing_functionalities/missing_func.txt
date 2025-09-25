@@ -1,0 +1,4 @@
+1.No edit and delete roots
+2. No description inserted into license (model)
+3. No APIs for Getting provinces, districts, sectors and cells
+4. No API for getting Center Origin

@@ -17,7 +17,7 @@
               <div class="alert alert-info">
                 <strong>License Type:</strong> 
                 <span id="currentRole">Type B</span><br>
-                <small>Light vehicles – Private cars, vans, and small pickups up to 3.5 tons.</small>
+                <small>Light vehicles - Private cars, vans, and small pickups up to 3.5 tons.</small>
               </div>
             </div>
             <div class="col-md-6">
@@ -43,7 +43,9 @@
                 <div class="card">
                   <div class="card-header">
                     <h3 class="card-title">License type(s) | Driving description</h3>
-                   
+                   <div class="col-auto">
+                  <a href="javascript:void(0)" class="btn btn-outline-primary btn-sm"><i class="fe fe-plus"></i>  create new</a>
+                    </div>
                   </div>
                   <div class="table-responsive">
                     <table class="table card-table table-vcenter text-nowrap table-hover">
@@ -114,42 +116,69 @@ foreach ($data as $role) {
 
     </div>
 
+<!-- Add this modal just before the closing </div> of your main container -->
+<div class="modal" id="createLicenseModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <form id="createLicenseForm">
+        <div class="modal-header">
+          <h5 class="modal-title">Create New License</h5>
+          <button type="button" class="close" onclick="closeCreateModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="full_name"  class="form-control" required placeholder="e.g. Motorcycles">
+          </div>
+          <div class="form-group">
+            <label>Short Name</label>
+            <input type="text" name="short_name" class="form-control" required placeholder="e.g. A">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea row="3" type="text" name="description" class="form-control" placeholder="e.g. Authorizes the holder to drive motorcycles."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeCreateModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <script>
 // Show modal when "create new" button is clicked
 document.querySelector('.btn-outline-primary').addEventListener('click', function() {
-    document.getElementById('createUserModal').style.display = 'block';
+    document.getElementById('createLicenseModal').style.display = 'block';
 });
 function closeCreateModal() {
-    document.getElementById('createUserModal').style.display = 'none';
+    document.getElementById('createLicenseModal').style.display = 'none';
 }
 
 // Handle form submit
-document.getElementById('createUserForm').addEventListener('submit', function(e) {
+document.getElementById('createLicenseForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const form = e.target;
     const payload = {
-        first_name: form.first_name.value,
-        last_name: form.last_name.value,
-        email: form.email.value,
-        phone: form.phone.value,
-        center_id: form.center_id.value,
-        school_id: form.school_id.value,
-        role_id: form.role_id.value
+        full_name: form.full_name.value,
+        short_name: form.short_name.value,
+        description: form.description.value
     };
-    fetch('../_api/auth/register', {
+    fetch('../_api/settings/license/new', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
     })
     .then(response => response.json())
     .then(data => {
-        alert('User created!');
+        alert('License created!');
         closeCreateModal();
         location.reload();
     })
     .catch(error => {
-        alert('Error creating user');
+        alert('Error creating license');
         console.error(error);
     });
 });
@@ -162,3 +191,4 @@ document.getElementById('createUserForm').addEventListener('submit', function(e)
     overflow-y: auto;
 }
 </style>
+
