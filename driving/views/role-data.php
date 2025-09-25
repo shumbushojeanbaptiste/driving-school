@@ -176,47 +176,63 @@ foreach ($data as $role) {
 </div>
 
 
-        </div>
-        </div>
-
+    </div>
     </div>
 
+</div>
 
+<!-- Add this modal just before the closing </div> of your main container -->
+<div class="modal" id="createRoleModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <form id="createRoleForm">
+        <div class="modal-header">
+          <h5 class="modal-title">Create New Role</h5>
+          <button type="button" class="close" onclick="closeCreateModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Role Name</label>
+            <input type="text" name="role_name" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeCreateModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 <script>
 // Show modal when "create new" button is clicked
 document.querySelector('.btn-outline-primary').addEventListener('click', function() {
-    document.getElementById('createUserModal').style.display = 'block';
+    document.getElementById('createRoleModal').style.display = 'block';
 });
 function closeCreateModal() {
-    document.getElementById('createUserModal').style.display = 'none';
+    document.getElementById('createRoleModal').style.display = 'none';
 }
 
 // Handle form submit
-document.getElementById('createUserForm').addEventListener('submit', function(e) {
+document.getElementById('createRoleForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const form = e.target;
     const payload = {
-        first_name: form.first_name.value,
-        last_name: form.last_name.value,
-        email: form.email.value,
-        phone: form.phone.value,
-        center_id: form.center_id.value,
-        school_id: form.school_id.value,
-        role_id: form.role_id.value
+        role_name: form.role_name.value,
     };
-    fetch('../_api/auth/register', {
+    fetch('../_api/settings/create', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
     })
     .then(response => response.json())
     .then(data => {
-        alert('User created!');
+        alert('Role created!');
         closeCreateModal();
         location.reload();
     })
     .catch(error => {
-        alert('Error creating user');
+        alert('Error creating role');
         console.error(error);
     });
 });

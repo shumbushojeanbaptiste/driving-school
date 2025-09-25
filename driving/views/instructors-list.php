@@ -127,4 +127,93 @@ foreach ($data as $instructor) {
 
     </div>
 
+<!-- Add this modal just before the closing </div> of your main container -->
+<div class="modal" id="createInstructorModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <form id="createInstructorForm">
+        <div class="modal-header">
+          <h5 class="modal-title">Create New Instructor</h5>
+          <button type="button" class="close" onclick="closeCreateModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Instructor Code</label>
+            <input type="text" name="instructor_code" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" name="first_name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" name="last_name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="text" name="phone" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>ID No</label>
+            <input type="number" name="ID_number" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" name="email" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeCreateModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
+<script>
+// Show modal when "create new" button is clicked
+document.querySelector('.btn-outline-primary').addEventListener('click', function() {
+    document.getElementById('createInstructorModal').style.display = 'block';
+});
+function closeCreateModal() {
+    document.getElementById('createInstructorModal').style.display = 'none';
+}
+
+// Handle form submit
+document.getElementById('createInstructorForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const payload = {
+        instructor_code: form.instructor_code.value,
+        first_name: form.first_name.value,
+        last_name: form.last_name.value,
+        phone: form.phone.value,
+        ID_number: form.ID_number.value,
+        email: form.email.value
+    };
+    fetch('../_api/instructors/register', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Instructor created!');
+        closeCreateModal();
+        location.reload();
+    })
+    .catch(error => {
+        alert('Error creating Instructor');
+        console.error(error);
+    });
+});
+</script>
+
+<style>
+/* Add this style to make the modal body scrollable */
+.modal .modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+</style>
